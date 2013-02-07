@@ -57,11 +57,26 @@ AS_IF([test "x$ac_cv_lib_kyotocabinet_main" = "xyes"],
 		])
 	])
 
+# Sqlite3
+AC_ARG_WITH(sqlite3,
+        AS_HELP_STRING([--with-sqlite3], [sqlite3 libraries]),
+        AS_IF([test "$withval" != "no"], [CXXFLAGS="${CXXFLAGS} -I${withval}/include -I${withval}/include/sqlite3" LDFLAGS="${LDFLAGS} -L${withval}/lib"], []))
+AS_IF([test "x$with_sqlite3" != "xno"],
+        [AC_CHECK_LIB(sqlite3, main, [], [])], [ac_cv_lib_sqlite3_main=no])
+AS_IF([test "x$ac_cv_lib_sqlite3_main" = "xyes"],
+        [],
+        [AS_IF([test "x$with_sqlite3" != "x" -a "x$with_sqlite3" != "xno"],
+                [AC_MSG_ERROR([sqlite3 requested but not found])
+                ])
+        ])
 
 # Checks for additional features
 
 # Kyoto Cabinet
 AM_CONDITIONAL(ENABLE_KYOTOCABINET, test "$ac_cv_lib_kyotocabinet_main" = "yes")
+
+# Sqlite3
+AM_CONDITIONAL(ENABLE_SQLITE3, test "$ac_cv_lib_sqlite3_main" = "yes")
 
 # MySQL replication
 AC_MSG_CHECKING(if mysql replication is enabled)

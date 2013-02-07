@@ -231,6 +231,18 @@ int flared::startup(int argc, char **argv) {
 				ini_option_object().get_storage_dfunit());
 		break;
 	#endif
+	#ifdef HAVE_LIBSQLITE3
+	case storage::type_sqlite3:
+		this->_storage = new storage_sqlite3(ini_option_object().get_data_dir(),
+				ini_option_object().get_mutex_slot(),
+				ini_option_object().get_storage_ap(),
+				ini_option_object().get_storage_bucket_size(),
+				ini_option_object().get_storage_cache_size(),
+				ini_option_object().get_storage_compress(),
+				ini_option_object().is_storage_large(),
+				ini_option_object().get_storage_dfunit());
+		break;
+	#endif
 	default:
 		log_err("unknown storage type [%s]", ini_option_object().get_storage_type().c_str());
 		return -1;

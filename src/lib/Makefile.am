@@ -87,3 +87,6 @@ libflare_la_SOURCES = \
 if ENABLE_KYOTOCABINET
 libflare_la_SOURCES += storage_kch.h storage_kch.cc
 endif
+if ENABLE_SQLITE3
+libflare_la_SOURCES += storage_sqlite3.h storage_sqlite3.cc
+endif

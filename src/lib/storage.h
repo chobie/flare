@@ -66,6 +66,7 @@ public:
 		type_tch,
 		type_tcb,
 		type_kch,
+		type_sqlite3,
 	};
 
 	enum									capability {
@@ -280,6 +281,8 @@ public:
 			t = type_tcb;
 		} else if (s == "kch") {
 			t = type_kch;
+		} else if (s == "sqlite3") {
+			t = type_sqlite3;
 		} else {
 			return -1;
 		}
@@ -294,6 +297,8 @@ public:
 			return "tcb";
 		case type_kch:
 			return "kch";
+		case type_sqlite3:
+			return "sqlite3";
 		}
 		return "";
 	};

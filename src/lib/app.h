@@ -52,6 +52,9 @@
 #ifdef HAVE_LIBKYOTOCABINET
 #include "storage_kch.h"
 #endif
+#ifdef HAVE_LIBSQLITE3
+#include "storage_sqlite3.h"
+#endif
 
 using namespace std;
 using namespace boost;
